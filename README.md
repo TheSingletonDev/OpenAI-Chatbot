@@ -1,6 +1,6 @@
 # OpenAI Chatbot
 
-A cahtbot developed by consuming ASR, Translation and TTS APIs from [Bhashini](www.bhashini.gov.in) and Chat engine APIs from [OpenAI](https://openai.com/).
+A Chatbot developed by consuming ASR, Translation and TTS APIs from [Bhashini](www.bhashini.gov.in) and Chat engine APIs from [OpenAI](https://openai.com/).
 
 ## Getting Started
 
