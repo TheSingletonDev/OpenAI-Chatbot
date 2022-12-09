@@ -87,7 +87,7 @@ class LanguageController extends GetxController {
                       value: eachLangCode, returnWhat: LANGUAGE_MAP.languageName, lang_code_map: AppConstants.LANGUAGE_CODE_MAP));
                 }
 
-                Future.delayed(const Duration(seconds: 2)).then((value) {
+                Future.delayed(const Duration(seconds: 13)).then((value) {
                   _appUIController.changeAllAvailableLanguages(allAvailableLanguages: finalLangNameForUI);
                   _appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: true);
                 });

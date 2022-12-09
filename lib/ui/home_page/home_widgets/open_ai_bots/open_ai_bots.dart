@@ -30,7 +30,7 @@ class OpenAIBotsList extends StatelessWidget {
                   appUIController.changeSelectedChatBot(selectedChatBotIndexInUI: index);
                 },
                 child: CircleAvatar(
-                  radius: index == appUIController.selectedChatBotIndex ? 65 : 50,
+                  radius: index == appUIController.selectedChatBotIndex ? 65 : 40,
                   backgroundColor: Colors.transparent,
                   child: index == appUIController.selectedChatBotIndex
                       ? Image.asset(listOfAvaiableBot[index]['bot_avatar_path'].toString())

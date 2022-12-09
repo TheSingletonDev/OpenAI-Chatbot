@@ -25,7 +25,7 @@ class OpenAIChatBot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-      Color baseColor = const Color(0XFF462300);
+      Color baseColor = const Color(0XFF423D73);
       ColorScheme lightColorScheme;
       ColorScheme darkColorScheme;
 
