@@ -128,7 +128,7 @@ class AppConstants {
   static const String ASR_CALLBACK_CDAC_URL = 'https://cdac.ulcacontrib.org/asr/v1/recognize';
   static const String STS_BASE_URL = 'https://meity-auth.ulcacontrib.org/ulca/apis';
   static const String OPEN_AI_BASE_URL = 'https://api.openai.com';
-  static const String OPEN_AI_BEARER_TOKEN = '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';
+  static const String OPEN_AI_BEARER_TOKEN = 'Your API Key here';
 
   static const String SEARCH_REQ_URL = '/v0/model/search';
   static const String ASR_REQ_URL = '/asr/v1/model/compute';
