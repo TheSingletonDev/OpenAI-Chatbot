@@ -12,7 +12,7 @@ import 'ui/home_page/home_page.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   GestureBinding.instance.resamplingEnabled = true;
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.black87));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Color(0XFF423D73)));
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     GetStorage.init().then((_) => dotenv.load(fileName: ".env").then((value) => runApp(const OpenAIChatBot())));
@@ -45,6 +45,7 @@ class OpenAIChatBot extends StatelessWidget {
       //   GetStorage().write('userSelectedLangCode', 'en');
       //   GetStorage().write('userSelectedLang', 'English');
       // }
+
       return GetMaterialApp(
           // locale: Locale(GetStorage().read('userSelectedLangCode')),
           // translations: LocalizedContent(),
