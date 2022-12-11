@@ -75,14 +75,14 @@ class SelectLanguageButton extends StatelessWidget {
           icon: Icon(
             Icons.arrow_drop_down_rounded,
             color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(isActive ? 1 : 0.3),
-            size: 50.w,
+            size: 40.w,
           ),
           label: AutoSizeText(
             appUIController.selectedSourceLangNameInUI.isEmpty
                 ? AppConstants.DEFAULT_SELECT_DROPDOWN_LABEL
                 : appUIController.selectedSourceLangNameInUI,
             maxLines: 1,
-            maxFontSize: (25.w).toInt().toDouble(),
+            maxFontSize: (40.w).toInt().toDouble(),
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.kodchasan(
                 color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(isActive ? 1 : 0.3), fontSize: 30.w, fontWeight: FontWeight.w700),

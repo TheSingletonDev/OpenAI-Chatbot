@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:openaichatbot/config/app_constants.dart';
 import 'package:openaichatbot/controllers/app_ui_controller.dart';
@@ -33,7 +34,7 @@ class OpenAIBotsList extends StatelessWidget {
                   appUIController.changeCurrentRequestStatusForUI(newStatus: '');
                 },
                 child: CircleAvatar(
-                  radius: index == appUIController.selectedChatBotIndex ? 65 : 40,
+                  radius: index == appUIController.selectedChatBotIndex ? 65.w : 45.w,
                   backgroundColor: Colors.transparent,
                   child: index == appUIController.selectedChatBotIndex
                       ? Image.asset(listOfAvaiableBot[index]['bot_avatar_path'].toString())

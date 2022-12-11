@@ -38,45 +38,59 @@ class BotChatWindow extends StatelessWidget {
           children: [
             const ChatBotName(),
             HorizontalDivider(horMargin: 20.w, verMargin: 10.w, dividerHeight: 2.h, dividerBorderRad: 2.h),
-            Container(
-              height: SizeConfig.blockSizeVertical * 3,
-              width: SizeConfig.blockSizeHorizontal * 94,
-              padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 1),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    'Current Status: ',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.comfortaa(color: Theme.of(context).colorScheme.onTertiaryContainer, fontWeight: FontWeight.w800),
-                  ),
-                  GetBuilder<AppUIController>(builder: (appUIController) {
-                    return AutoSizeText(
-                      appUIController.currentRequestStatusForUI.isEmpty
-                          ? 'Bot Initiated. Waiting for user input.'
-                          : appUIController.currentRequestStatusForUI,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.comfortaa(color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w400),
-                    );
-                  }),
-                ],
+            Expanded(
+              flex: 1,
+              child: Container(
+                height: SizeConfig.blockSizeVertical * 3,
+                width: SizeConfig.blockSizeHorizontal * 94,
+                padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 1),
+                ),
+                child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: AutoSizeText(
+                        'Current Status:',
+                        maxLines: 1,
+                        minFontSize: 9,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.comfortaa(
+                            fontSize: 15.w, color: Theme.of(context).colorScheme.onTertiaryContainer, fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                    GetBuilder<AppUIController>(builder: (appUIController) {
+                      return Expanded(
+                        flex: 6,
+                        child: AutoSizeText(
+                          appUIController.currentRequestStatusForUI.isEmpty
+                              ? 'Bot Initiated. Waiting for user input.'
+                              : appUIController.currentRequestStatusForUI,
+                          maxLines: 1,
+                          minFontSize: 9,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.comfortaa(
+                              fontSize: 15.w, color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w400),
+                        ),
+                      );
+                    }),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: SizeConfig.blockSizeVertical * 0.5),
             const Expanded(
-              flex: 10,
+              flex: 15,
               child: ActualChatContainer(),
             ),
             SizedBox(height: SizeConfig.blockSizeVertical * 1),
             HorizontalDivider(horMargin: 20.w, verMargin: 10.w, dividerHeight: 2.h, dividerBorderRad: 2.h),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Row(
                 children: [
                   const Expanded(child: SelectLanguageButton()),
