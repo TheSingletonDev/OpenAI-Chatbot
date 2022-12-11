@@ -117,4 +117,28 @@ class TranslationAppAPIClient {
       return [];
     }
   }
+
+  Future<dynamic> sendOpenAIChatGPTRequest({required openAIChatGPTPayload}) async {
+    try {
+      var options = BaseOptions(
+        baseUrl: AppConstants.OPEN_AI_BASE_URL,
+        connectTimeout: 80000,
+        receiveTimeout: 50000,
+        validateStatus: (status) => true, // Without this, if status code comes other than 200, DIO throws Exception
+      );
+
+      Dio openAIDio = Dio(options);
+
+      var response = await openAIDio.post(AppConstants.OPEN_AI_REQ_URL,
+          data: openAIChatGPTPayload,
+          options: Options(
+              headers: {'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': 'Bearer ${AppConstants.OPEN_AI_BEARER_TOKEN}'}));
+      if (response.statusCode == 200) {
+        return response.data;
+      }
+      return {};
+    } catch (e) {
+      return {};
+    }
+  }
 }

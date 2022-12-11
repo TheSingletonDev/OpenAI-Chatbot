@@ -11,6 +11,7 @@ import 'package:openaichatbot/ui/general_widgets/horizontal_divider.dart';
 import 'w_actual_chat_container.dart';
 import 'w_record_btn.dart';
 import 'w_select_lang.dart';
+import 'w_stop_btn.dart';
 
 class BotChatWindow extends StatelessWidget {
   final int flexValue;
@@ -37,7 +38,37 @@ class BotChatWindow extends StatelessWidget {
           children: [
             const ChatBotName(),
             HorizontalDivider(horMargin: 20.w, verMargin: 10.w, dividerHeight: 2.h, dividerBorderRad: 2.h),
-            SizedBox(height: SizeConfig.blockSizeVertical * 1),
+            Container(
+              height: SizeConfig.blockSizeVertical * 3,
+              width: SizeConfig.blockSizeHorizontal * 94,
+              padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.h),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal * 1),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    'Current Status: ',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.comfortaa(color: Theme.of(context).colorScheme.onTertiaryContainer, fontWeight: FontWeight.w800),
+                  ),
+                  GetBuilder<AppUIController>(builder: (appUIController) {
+                    return AutoSizeText(
+                      appUIController.currentRequestStatusForUI.isEmpty
+                          ? 'Bot Initiated. Waiting for user input.'
+                          : appUIController.currentRequestStatusForUI,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.comfortaa(color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w400),
+                    );
+                  }),
+                ],
+              ),
+            ),
+            SizedBox(height: SizeConfig.blockSizeVertical * 0.5),
             const Expanded(
               flex: 10,
               child: ActualChatContainer(),
@@ -50,7 +81,7 @@ class BotChatWindow extends StatelessWidget {
                 children: [
                   const Expanded(child: SelectLanguageButton()),
                   SizedBox(width: SizeConfig.blockSizeHorizontal * 3),
-                  const Expanded(child: RecordButton()),
+                  const Expanded(child: RecordStopButton()),
                 ],
               ),
             ),
@@ -58,6 +89,19 @@ class BotChatWindow extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class RecordStopButton extends StatelessWidget {
+  const RecordStopButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AppUIController>(builder: (appUIController) {
+      return appUIController.isUserRecording ? const StopButton() : const RecordButton();
+    });
   }
 }
 

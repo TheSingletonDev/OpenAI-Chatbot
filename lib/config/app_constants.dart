@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 enum LANGUAGE_MAP { languageName, languageCode }
 
-enum MODEL_TYPES { ASR, TRANSLATION, TTS }
+enum MODEL_TYPES { ASR, TRANSLATION, TTS, OPENAI }
 
 enum LANG_DROP_DOWN_TYPE { sourceLanguage, targetLanguage }
 
@@ -12,74 +12,96 @@ enum GETX_SNACK_BAR { title, message }
 
 enum GENDER { male, female }
 
+enum MESSAGE_OWNER { Bot, Human }
+
+enum REQUEST_TYPE { Bhashini, OpenAI }
+
 class AppConstants {
   static final AVAILABLE_BOTS = {
     'bots': [
       {
         'bot_name': 'Sarcastic Joker',
         'bot_avatar_path': 'assets/images/avatars/Avatar_5.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'You: %replaceContent%\nSarcastic Reply:',
-        'max_token': 60,
-        "temperature": 1,
-        "top_p": 1,
-        "frequency_penalty": 1,
-        "presence_penalty": 0.0
+        'bot_gender': 'male',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'You: %replaceContent%\nSarcastic Reply:',
+          'max_tokens': 60,
+          "temperature": 1,
+          "top_p": 1,
+          "frequency_penalty": 1,
+          "presence_penalty": 0.0
+        }
       },
       {
         'bot_name': 'Factual Gandalf',
         'bot_avatar_path': 'assets/images/avatars/Avatar_3.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'Factual Response. Q: %replaceContent%\nA:',
-        'max_token': 60,
-        "temperature": 0,
-        "top_p": 0.1,
-        "frequency_penalty": 0.0,
-        "presence_penalty": 0.0
+        'bot_gender': 'female',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'Factual Response. Q: %replaceContent%\nA:',
+          'max_tokens': 150,
+          "temperature": 0,
+          "top_p": 0.1,
+          "frequency_penalty": 0.0,
+          "presence_penalty": 0.0
+        }
       },
       {
         'bot_name': 'Friendly Spiderman',
         'bot_avatar_path': 'assets/images/avatars/Avatar_1.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'Friend: %replaceContent%\nYou:',
-        'max_token': 60,
-        "temperature": 0.5,
-        "top_p": 1,
-        "frequency_penalty": 0.5,
-        "presence_penalty": 0.0
+        'bot_gender': 'male',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'Friend: %replaceContent%\nYou:',
+          'max_tokens': 60,
+          "temperature": 0.5,
+          "top_p": 1,
+          "frequency_penalty": 0.5,
+          "presence_penalty": 0.0
+        }
       },
       {
         'bot_name': 'Barberic Annabelle',
         'bot_avatar_path': 'assets/images/avatars/Avatar_6.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'Three sentence Horror Story about: %replaceContent%',
-        'max_token': 150,
-        "temperature": 1,
-        "top_p": 1,
-        "frequency_penalty": 1,
-        "presence_penalty": 0.0
+        'bot_gender': 'female',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'Three sentence Horror Story about: %replaceContent%',
+          'max_tokens': 150,
+          "temperature": 1,
+          "top_p": 1,
+          "frequency_penalty": 1,
+          "presence_penalty": 0.0
+        }
       },
       {
         'bot_name': 'Modest Poet',
         'bot_avatar_path': 'assets/images/avatars/Avatar_2.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'Write a 80 word poem about: %replaceContent%',
-        'max_token': 60,
-        "temperature": 0.8,
-        "top_p": 0.6,
-        "frequency_penalty": 0.7,
-        "presence_penalty": 0.0
+        'bot_gender': 'male',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'Write poem about: %replaceContent%',
+          'max_tokens': 150,
+          "temperature": 0.8,
+          "top_p": 0.6,
+          "frequency_penalty": 0.7,
+          "presence_penalty": 0.0
+        }
       },
       {
         'bot_name': 'Grammer Nazi',
         'bot_avatar_path': 'assets/images/avatars/Avatar_4.webp',
-        'model': 'text-davinci-003',
-        'prompt': 'Correct this to standard English: %replace content%',
-        'max_token': 60,
-        "temperature": 0,
-        "top_p": 1,
-        "frequency_penalty": 0.0,
-        "presence_penalty": 0.0
+        'bot_gender': 'female',
+        'payload_json': {
+          'model': 'text-davinci-003',
+          'prompt': 'Correct this to standard English: %replaceContent%',
+          'max_tokens': 60,
+          "temperature": 0,
+          "top_p": 1,
+          "frequency_penalty": 0.0,
+          "presence_penalty": 0.0
+        }
       },
     ]
   };
@@ -105,11 +127,14 @@ class AppConstants {
   static const String ASR_CALLBACK_AZURE_URL = 'https://meity-dev-asr.ulcacontrib.org/asr/v1/recognize';
   static const String ASR_CALLBACK_CDAC_URL = 'https://cdac.ulcacontrib.org/asr/v1/recognize';
   static const String STS_BASE_URL = 'https://meity-auth.ulcacontrib.org/ulca/apis';
+  static const String OPEN_AI_BASE_URL = 'https://api.openai.com';
+  static const String OPEN_AI_BEARER_TOKEN = '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';
 
   static const String SEARCH_REQ_URL = '/v0/model/search';
   static const String ASR_REQ_URL = '/asr/v1/model/compute';
   static const String TRANS_REQ_URL = '/v0/model/compute';
   static const String TTS_REQ_URL = '/v0/model/compute';
+  static const String OPEN_AI_REQ_URL = '/v1/completions';
 
   static const String IMAGE_ASSETS_PATH = 'assets/images/';
 
@@ -165,6 +190,10 @@ class AppConstants {
   static const String SEND_TTS_REQ_STATUS_MSG = 'Speech generation in %replaceContent% in progress !';
   static const String TTS_SUCCESS_STATUS_MSG = 'Speech in %replaceContent% generated !';
   static const String TTS_FAIL_STATUS_MSG = 'Speech generation in %replaceContent% failed !';
+
+  static const String SEND_OPEN_AI_REQ_STATUS_MSG = 'Open AI response generation in progress !';
+  static const String OPEN_AI_FAIL_STATUS_MSG = 'Open AI failed to generate a response for your query !';
+  static const String OPEN_AI_SUCCESS_STATUS_MSG = 'Open AI ChatGPT generated a response for your query !';
 
   static const String OUTPUT_PLAYING_ERROR_MSG = 'Audio Playback in progress !';
   static const String SELECT_SOURCE_LANG_ERROR_MSG = 'Please select a Source Language first !';

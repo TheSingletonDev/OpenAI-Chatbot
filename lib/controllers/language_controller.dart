@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../config/app_constants.dart';
 import '../data/models/search_model.dart';
 import '../data/translation_app_api_client.dart';
@@ -7,7 +6,6 @@ import 'app_ui_controller.dart';
 
 class LanguageController extends GetxController {
   late TranslationAppAPIClient _translationAppAPIClient;
-  late AppUIController _appUIController;
 
   late SearchModel _availableASRModels;
   SearchModel get availableASRModels => _availableASRModels;
@@ -22,10 +20,10 @@ class LanguageController extends GetxController {
   void onInit() {
     super.onInit();
     _translationAppAPIClient = Get.find();
-    _appUIController = Get.find();
   }
 
   void calculateAvailableLanguages() {
+    AppUIController appUIController = Get.find();
     List<dynamic> taskPayloads = [];
     for (String eachModelType in AppConstants.TYPES_OF_MODELS_LIST) {
       taskPayloads.add({"task": eachModelType, "sourceLanguage": "", "targetLanguage": "", "domain": "All", "submitter": "All", "userId": null});
@@ -34,7 +32,7 @@ class LanguageController extends GetxController {
     _translationAppAPIClient.getAllModels(taskPayloads: taskPayloads).then((responseList) {
       responseList.isEmpty
           ? () {
-              _appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: false);
+              appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: false);
             }()
           : () {
               try {
@@ -86,14 +84,13 @@ class LanguageController extends GetxController {
                   finalLangNameForUI.add(AppConstants.getLanguageCodeOrName(
                       value: eachLangCode, returnWhat: LANGUAGE_MAP.languageName, lang_code_map: AppConstants.LANGUAGE_CODE_MAP));
                 }
-
-                Future.delayed(const Duration(seconds: 13)).then((value) {
-                  _appUIController.changeAllAvailableLanguages(allAvailableLanguages: finalLangNameForUI);
-                  _appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: true);
+                Future.delayed(const Duration(seconds: 8)).then((value) {
+                  appUIController.changeAllAvailableLanguages(allAvailableLanguages: finalLangNameForUI);
+                  appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: true);
                 });
               } on Exception {
-                _appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: false);
-                _appUIController.changeAllAvailableLanguages(allAvailableLanguages: {});
+                appUIController.changeAreModelsLoadedSuccessfully(areModelsLoadedSuccessfully: false);
+                appUIController.changeAllAvailableLanguages(allAvailableLanguages: {});
               }
             }();
     });

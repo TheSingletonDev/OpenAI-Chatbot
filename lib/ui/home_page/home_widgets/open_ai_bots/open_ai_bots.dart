@@ -28,6 +28,9 @@ class OpenAIBotsList extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   appUIController.changeSelectedChatBot(selectedChatBotIndexInUI: index);
+                  appUIController.changeSelectedBotGenderInUI(selectBotGender: listOfAvaiableBot[index]['bot_gender'].toString());
+                  appUIController.updateMessagesListforUI(messagesList: [], isResetRequest: true);
+                  appUIController.changeCurrentRequestStatusForUI(newStatus: '');
                 },
                 child: CircleAvatar(
                   radius: index == appUIController.selectedChatBotIndex ? 65 : 40,

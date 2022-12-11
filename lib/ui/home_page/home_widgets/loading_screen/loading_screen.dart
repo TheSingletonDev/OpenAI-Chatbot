@@ -37,14 +37,14 @@ class LoadingScreen extends StatelessWidget {
                 flex: 5,
                 child: Lottie.asset(
                   'assets/lottie/chatbot-waving.json',
-                  delegates: LottieDelegates(
-                    values: [
-                      ValueDelegate.color(const ['eye R'], value: Theme.of(context).colorScheme.primary),
-                      ValueDelegate.color(const ['Rectangle_2', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.secondary),
-                      ValueDelegate.color(const ['Rectangle_3', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.primary),
-                      ValueDelegate.color(const ['Rectangle_4', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.secondary),
-                    ],
-                  ),
+                  // delegates: LottieDelegates(
+                  //   values: [
+                  //     ValueDelegate.color(const ['eye R'], value: Theme.of(context).colorScheme.primary),
+                  //     ValueDelegate.color(const ['Rectangle_2', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.secondary),
+                  //     ValueDelegate.color(const ['Rectangle_3', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.primary),
+                  //     ValueDelegate.color(const ['Rectangle_4', 'Rectangle 1', 'Fill 1'], value: Theme.of(context).colorScheme.secondary),
+                  //   ],
+                  // ),
                 ),
               ),
               Expanded(
@@ -71,7 +71,7 @@ class LoadingScreen extends StatelessWidget {
                         speed: const Duration(milliseconds: 100),
                       ),
                       TypewriterAnimatedText(
-                        'Let me setup myself to have a conversation with you !!',
+                        'Let me setup myself to have an intelligent conversation with you!',
                         textAlign: TextAlign.center,
                         textStyle: GoogleFonts.kodchasan(
                             fontSize: 30.w, color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w500),

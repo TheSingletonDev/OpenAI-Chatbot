@@ -17,66 +17,75 @@ class SelectLanguageButton extends StatelessWidget {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: GetBuilder<AppUIController>(builder: (appUIController) {
+        bool isActive = !appUIController.isUserRecording;
+
         return ElevatedButton.icon(
-          onPressed: () {
-            Get.bottomSheet(
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  height: 0.38.sh,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                  ),
-                  child: GridView.builder(
-                    itemCount: appUIController.allAvailableLanguages.length,
-                    itemBuilder: (context, index) {
-                      String eachSourceLanguage = appUIController.allAvailableLanguages.elementAt(index);
-                      return ElevatedButton(
-                        onPressed: () {
-                          appUIController.changeSelectedLangNameInUI(selectedLangNameInUI: eachSourceLanguage);
-                          Future.delayed(const Duration(milliseconds: 300)).then((_) => Get.back());
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                          overlayColor: MaterialStateProperty.all(Theme.of(context).colorScheme.surfaceVariant),
-                          elevation: MaterialStateProperty.all(0),
-                          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.w))),
+          onPressed: isActive
+              ? () {
+                  Get.bottomSheet(
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 0.38.sh,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         ),
-                        child: Center(
-                          child: AutoSizeText(
-                            eachSourceLanguage,
-                            minFontSize: (15.w).toInt().toDouble(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.kodchasan(
-                                fontSize: 25.w, color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w300),
+                        child: GridView.builder(
+                          itemCount: appUIController.allAvailableLanguages.length,
+                          itemBuilder: (context, index) {
+                            String eachSourceLanguage = appUIController.allAvailableLanguages.elementAt(index);
+                            return ElevatedButton(
+                              onPressed: () {
+                                appUIController.changeSelectedSourceLangNameInUI(selectedSourceLangNameInUI: eachSourceLanguage);
+                                Future.delayed(const Duration(milliseconds: 300)).then((_) => Get.back());
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                                overlayColor: MaterialStateProperty.all(Theme.of(context).colorScheme.surfaceVariant),
+                                elevation: MaterialStateProperty.all(0),
+                                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.w))),
+                              ),
+                              child: Center(
+                                child: AutoSizeText(
+                                  eachSourceLanguage,
+                                  minFontSize: (15.w).toInt().toDouble(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.kodchasan(
+                                      fontSize: 25.w, color: Theme.of(context).colorScheme.onPrimaryContainer, fontWeight: FontWeight.w300),
+                                ),
+                              ),
+                            );
+                          },
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            childAspectRatio: 2,
                           ),
                         ),
-                      );
-                    },
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 2,
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            );
-          },
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  );
+                }
+              : () {
+                  //Show snackbar here
+                },
           icon: Icon(
             Icons.arrow_drop_down_rounded,
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(isActive ? 1 : 0.3),
             size: 50.w,
           ),
           label: AutoSizeText(
-            appUIController.selectedLangNameInUI.isEmpty ? AppConstants.DEFAULT_SELECT_DROPDOWN_LABEL : appUIController.selectedLangNameInUI,
+            appUIController.selectedSourceLangNameInUI.isEmpty
+                ? AppConstants.DEFAULT_SELECT_DROPDOWN_LABEL
+                : appUIController.selectedSourceLangNameInUI,
             maxLines: 1,
             maxFontSize: (25.w).toInt().toDouble(),
             overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.kodchasan(color: Theme.of(context).colorScheme.onPrimaryContainer, fontSize: 30.w, fontWeight: FontWeight.w700),
+            style: GoogleFonts.kodchasan(
+                color: Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(isActive ? 1 : 0.3), fontSize: 30.w, fontWeight: FontWeight.w700),
           ),
           style: ButtonStyle(
             elevation: MaterialStateProperty.all(0),
