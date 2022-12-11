@@ -121,14 +121,13 @@ class AppConstants {
   ]; // This shall be same as keys in DEFAULT_MODEL_ID, DEFAULT_MODEL_TYPES
   static final List<String> LANG_CODE_MAP_HELPER = ['language_name', 'language_code'];
 
-  static const String APP_NAME = 'BHASHAVERSE';
+  static const String APP_NAME = 'OpenAI Chatbot';
   static const String APP_NAME_SUB = 'Powered by';
 
   static const String ASR_CALLBACK_AZURE_URL = 'https://meity-dev-asr.ulcacontrib.org/asr/v1/recognize';
   static const String ASR_CALLBACK_CDAC_URL = 'https://cdac.ulcacontrib.org/asr/v1/recognize';
   static const String STS_BASE_URL = 'https://meity-auth.ulcacontrib.org/ulca/apis';
   static const String OPEN_AI_BASE_URL = 'https://api.openai.com';
-  static const String OPEN_AI_BEARER_TOKEN = 'Your API Key here';
 
   static const String SEARCH_REQ_URL = '/v0/model/search';
   static const String ASR_REQ_URL = '/asr/v1/model/compute';

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../config/app_constants.dart';
 import 'models/search_model.dart';
 
@@ -131,8 +132,7 @@ class TranslationAppAPIClient {
 
       var response = await openAIDio.post(AppConstants.OPEN_AI_REQ_URL,
           data: openAIChatGPTPayload,
-          options: Options(
-              headers: {'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': 'Bearer ${AppConstants.OPEN_AI_BEARER_TOKEN}'}));
+          options: Options(headers: {'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': 'Bearer ${dotenv.env['BEARER_TOKEN']}'}));
       if (response.statusCode == 200) {
         return response.data;
       }

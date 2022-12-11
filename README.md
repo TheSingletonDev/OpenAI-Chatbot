@@ -19,6 +19,8 @@ Follow the below steps to successfully run this Flutter application:
 
 - Download the pubspec.yaml file and replace the original one with this one
 
+- Create a .env file with the content BEARER_TOKEN=sk-<<your_openAI_toke_here>>
+
 - Enter the terminal and execute following commands:
     - flutter clean
     - flutter pub get
