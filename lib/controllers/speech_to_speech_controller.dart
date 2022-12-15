@@ -438,7 +438,7 @@ class SpeechToSpeechController extends GetxController {
     if (response.isEmpty) {
       return '';
     }
-    return response['choices'][0]['text'].toString().replaceAll('\n', '');
+    return response['choices'][0]['text'].toString().replaceFirst('\n', '');
   }
 
   Future<List<String>> _getTTSOutput({required String transOutputAsTTSInputString, required String botGender}) async {
